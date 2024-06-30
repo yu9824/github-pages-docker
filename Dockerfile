@@ -21,7 +21,7 @@ RUN bundle add webrick
 EXPOSE 4000
 
 # copy entrypoint.sh and make it executable
-COPY --chown=reichen:reichen ./docker/entrypoint.sh /srv/jekyll/
+COPY --chown=reichen:reichen ./entrypoint.sh /srv/jekyll/
 RUN chmod 744 /srv/jekyll/entrypoint.sh
 
 # Set the default command to run Jekyll
