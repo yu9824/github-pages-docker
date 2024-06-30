@@ -32,6 +32,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: yu9824/github-pages
+          # Add the 'latest' tag as well, even if it is tagged.
           flavor: latest=true
           tags: type=semver,pattern={{version}}
 
@@ -48,5 +49,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ github.event.repository.owner }}/${{ github.event.repository.name }}
+          repository: ${{ github.repository }}
           short-description: ${{ github.event.repository.description }}
