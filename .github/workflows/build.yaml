@@ -6,7 +6,8 @@ on:
   push:
     tags:
       - 'v*'
-
+env:
+  DOCKERHUB_REPOSITORY: yu9824/github-pages
 jobs:
   build_and_push:
     runs-on: ubuntu-24.04
@@ -24,14 +25,14 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Extract metadata for Docker
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: yu9824/github-pages
+          images: ${{ env.DOCKERHUB_REPOSITORY }}
           # Add the 'latest' tag as well, even if it is tagged.
           flavor: latest=true
           tags: type=semver,pattern={{version}}
@@ -47,7 +48,7 @@ jobs:
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ${{ github.repository }}
+          repository: ${{ env.DOCKERHUB_REPOSITORY }}
           short-description: ${{ github.event.repository.description }}
