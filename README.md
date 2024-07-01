@@ -8,6 +8,8 @@ docker run -it --rm --name github-pages \
     -p "4000:4000" yu9824/github-pages:latest
 ```
 
+and then, access to http://localhost:4000/
+
 ## Links
 
 - Github: https://github.com/yu9824/github-pages-docker
